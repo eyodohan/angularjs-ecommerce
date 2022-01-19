@@ -1,4 +1,5 @@
-<h3 class="mt-1" *ngIf="products.length>0; else noProduct">{{title}}</h3>
+<!-- <h3 class="mt-1" *ngIf="products.length>0; else noProduct">{{title}}</h3> -->
+<app-category></app-category>
 <div class="mb-3">
   <input class="form-control" id="productName" [(ngModel)]="filterText" placeholder="Arama metninizi giriniz">
   <div class="form-text" *ngIf="filterText">Şu an <strong>{{filterText}}</strong> aradınız.</div>
@@ -10,12 +11,13 @@
       Bu kategoride ürün yoktur!!!
     </div>
   </ng-template>
-  <div *ngFor="let product of products | productFilter:filterText" class="card" style="width: 18rem;">
+  <div *ngFor="let product of products | productFilter:filterText" class="card" class="productbox" style="width: 18rem;">
       <img [src]="product.imageUrl" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">{{product.name}} {{product.price | currency:"USD":"symbol":"1.2-2"}}</h5> //pipe yapısını kullandık
+        <h5 class="card-title">{{product.name}} {{product.price | currency:"USD":"symbol":"1.2-2"}}</h5> 
+        <!-- h5 te pipe yapısını kullandık -->
         <p class="card-text">{{product.description}}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a (click)="addToCart(product)" href="#" class="btn btn-primary">Sepete Ekle</a>
       </div>
   </div>
 </div>
